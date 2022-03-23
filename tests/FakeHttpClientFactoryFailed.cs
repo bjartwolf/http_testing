@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace tests
 {
-
-    public class FakeHttpClientHandlerOk : HttpClientHandler
+    public class FakeHttpClientHandlerFail : HttpClientHandler
     {
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
@@ -16,15 +15,16 @@ namespace tests
 
         private HttpResponseMessage SendAsync(HttpMethod requestMethod, string requestUriPathAndQuery)
         {
-            var response = File.ReadAllText("examples/ok.json");
+            var response = File.ReadAllText("examples/failed.json");
             return new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(response) };
         }
     }
-    public class FakeHttpClientFactoryOk : IHttpClientFactory
+
+    public class FakeHttpClientFactoryFail : IHttpClientFactory
     {
         public HttpClient CreateClient(string name)
         {
-            var client = new HttpClient(new FakeHttpClientHandlerOk());
+            var client = new HttpClient(new FakeHttpClientHandlerFail());
             return client;
         }
     }
