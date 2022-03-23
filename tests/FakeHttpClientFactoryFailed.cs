@@ -13,7 +13,7 @@ namespace tests
             var response = File.ReadAllText("examples/failed.json");
             return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(response) });
         }
-   }
+    }
 
     public class FakeHttpClientFactoryFail : IHttpClientFactory
     {
