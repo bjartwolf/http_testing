@@ -23,4 +23,13 @@
     <ProjectReference Include="..\api\api.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="examples\failed.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="examples\ok.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

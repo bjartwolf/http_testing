@@ -36,7 +36,8 @@ namespace api.Controllers
         [HttpGet]
         public async Task<IEnumerable<WeatherForecast>> Get(CancellationToken ct)
         {
-            var healthCheckClient = new Client(_factory.CreateClient());
+            var healthCheckClient = new Client(_factory.CreateClient()) {BaseUrl = "http://foo.com"};
+
             var response = await healthCheckClient.GetHealthCheckAsync(ct);
             var rng = new Random();
 
