@@ -33,3 +33,8 @@ The server has registered the IHttpClientFactory using
 The tests can create its own IHttpClientFactories, that create real HttpClients that return the examples from the documentation-repo-example mentioned above.
 Since the contracts are written in such a way that the examples are seperate, embedded files, it is easy for the fakes to just return them as content.
 There are no mocks, and no fake HttpClients. Everythin except the factory and the HttpClientHandlers are what you expect...
+
+
+# The strawman
+I lied. I implemented the strawman too. You can find it in the strawman folder. Notice how little of the client is actually implemented. 
+I tried to do both in a TDD kind of way, and it turned out I did not have to implement anything to make the test pass, because the interface is almost doing nothing.
