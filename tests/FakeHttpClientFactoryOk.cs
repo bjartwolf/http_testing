@@ -35,7 +35,7 @@ namespace tests
     }
 
 
-    public class FakeHttpClientFactoryOk: IHttpClientFactory
+    public class FakeHttpClientFactoryOk : IHttpClientFactory
     {
         public HttpClient CreateClient(string name)
         {
@@ -43,7 +43,7 @@ namespace tests
             return client;
         }
     }
-    public class FakeHttpClientFactoryFail: IHttpClientFactory
+    public class FakeHttpClientFactoryFail : IHttpClientFactory
     {
         public HttpClient CreateClient(string name)
         {
