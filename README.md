@@ -1,6 +1,7 @@
 # http_testing
 
-**tl;dr; Mock the factory that creates HttpClients, use real HttpClients and real deserializers. For added bonus points, we can use examples from the Open API specification in the tests. **
+**tl;dr; Mock the factory that creates HttpClients, use real HttpClients and real deserializers.** 
+**For added bonus points, we can use examples from the Open API specification in the tests.**
 
 This README file describes how I like to test HTTP in .NET. Since the introduction of [IHttpClientFactory](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-6.0)
 things have become a lot easier. The factory handles a lot of hard stuff that deals with TCP/IP and port reuse and whatnot. 
