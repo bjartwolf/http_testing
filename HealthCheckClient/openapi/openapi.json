@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Healthchecks - OpenAPI 3.0",
+    "description": "This is a sample health checkbased on the OpenAPI 3.0 specification. It can be extended to cover more cases for ready/liveness etc checks",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": { "email": "apiteam@swagger.io" },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.5"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [{ "url": "/api/v1" }],
+  "tags": [
+    {
+      "name": "Health",
+      "description": "Everything about your health",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Get health for systems that like 500 error codes",
+        "description": "Reports the health back... Should it have body?",
+        "operationId": "getHealth",
+        "tags": ["Health"],
+        "responses": {
+          "200": {
+            "description": "Healthy or warning?"
+          },
+          "500": {
+            "description": "Unhealthy"
+          }
+        }
+      }
+    },
+    "/healthcheck": {
+      "get": {
+        "tags": ["Health"],
+        "summary": "Get health check",
+        "description": "Reports the health back...",
+        "operationId": "getHealthCheck",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Health" },
+                "examples": {
+                  "ok": { "value": { "$ref": "./examples/ok.json" } },
+                  "failed": { "value": { "$ref": "./examples/failed.json" } }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "petstore_auth": ["read:health"] }]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Health": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["Healthy", "Warning", "Unhealthy"]
+          },
+          "totalDuration": {
+            "type": "string",
+            "format": "duration",
+            "description": "Duration, should proably put a regex in here"
+          },
+          "entries": {
+            "type": "object",
+            "additionalProperties": {
+              "anyOf": [
+                { "$ref": "#/components/schemas/FailedEntry" },
+                { "$ref": "#/components/schemas/SuccessEntry" }
+              ]
+            }
+          }
+        }
+      },
+      "SuccessEntry": {
+        "type": "object",
+        "description": "Name of the healthcheck",
+        "required": ["duration", "status", "data", "tags"],
+        "properties": {
+          "data": { "type": "object" },
+          "duration": { "type": "string" },
+          "status": { "type": "string", "pattern": "Healthy" },
+          "tags": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "FailedEntry": {
+        "type": "object",
+        "description": "Name of the healthcheck",
+        "required": [
+          "duration",
+          "status",
+          "tags",
+          "description",
+          "exception",
+          "data"
+        ],
+        "properties": {
+          "data": { "type": "object" },
+          "duration": { "type": "string" },
+          "exception": { "type": "string" },
+          "description": { "type": "string" },
+          "status": { "type": "string", "pattern": "Unhealthy" },
+          "tags": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

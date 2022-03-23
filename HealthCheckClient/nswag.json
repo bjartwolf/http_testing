@@ -1,0 +1,13 @@
+{
+    "runtime": "NetCore31",
+    "documentGenerator": {
+        "fromDocument": {
+            "json": "openapi/openapi.json"
+        }
+    },
+    "codeGenerators": {
+        "openApiToCSharpClient": {
+            "output": "Client.g.cs"
+        }
+    }
+}
